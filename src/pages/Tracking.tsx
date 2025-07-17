@@ -4,60 +4,52 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Package, Truck, CheckCircle, Clock, Sparkles } from "lucide-react";
+import { Search, Package, Sparkles, ExternalLink, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { searchTrackingData } from "@/utils/googleSheets";
+
+interface TrackingResult {
+  mobileNumber: string;
+  trackingId: string;
+  companyName: string;
+  websiteUrl: string;
+}
 
 const Tracking = () => {
   const [mobileNumber, setMobileNumber] = useState("");
-  const [trackingResult, setTrackingResult] = useState<any>(null);
+  const [trackingResults, setTrackingResults] = useState<TrackingResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // TODO: Replace with your actual Google Sheet ID
+  const GOOGLE_SHEET_ID = "YOUR_GOOGLE_SHEET_ID";
 
   const handleTrack = async () => {
     if (!mobileNumber || mobileNumber.length !== 10) {
-      alert("Please enter a valid 10-digit mobile number");
+      setError("Please enter a valid 10-digit mobile number");
+      return;
+    }
+
+    if (GOOGLE_SHEET_ID === "YOUR_GOOGLE_SHEET_ID") {
+      setError("Google Sheet ID not configured. Please update the GOOGLE_SHEET_ID in the code.");
       return;
     }
 
     setIsLoading(true);
+    setError(null);
     
-    // Simulate API call
-    setTimeout(() => {
-      // Mock tracking data
-      const mockData = {
-        orderNumber: `SNR${mobileNumber.slice(-4)}${Math.floor(Math.random() * 1000)}`,
-        customerName: "Customer",
-        items: [
-          { name: "Premium Bedsheet Set", quantity: 1, status: "Delivered" },
-          { name: "Handcrafted Pillow Covers", quantity: 2, status: "In Transit" }
-        ],
-        status: "In Transit",
-        orderDate: "2024-01-15",
-        estimatedDelivery: "2024-01-20",
-        trackingSteps: [
-          { step: "Order Placed", completed: true, date: "2024-01-15" },
-          { step: "Processing", completed: true, date: "2024-01-16" },
-          { step: "Shipped", completed: true, date: "2024-01-17" },
-          { step: "In Transit", completed: true, date: "2024-01-18" },
-          { step: "Out for Delivery", completed: false, date: "2024-01-19" },
-          { step: "Delivered", completed: false, date: "2024-01-20" }
-        ]
-      };
+    try {
+      const results = await searchTrackingData(mobileNumber, GOOGLE_SHEET_ID);
+      setTrackingResults(results);
       
-      setTrackingResult(mockData);
+      if (results.length === 0) {
+        setError("No tracking information found for this mobile number.");
+      }
+    } catch (err) {
+      setError("Failed to fetch tracking data. Please try again.");
+      console.error('Tracking error:', err);
+    } finally {
       setIsLoading(false);
-    }, 1500);
-  };
-
-  const getStatusIcon = (step: string, completed: boolean) => {
-    if (completed) return <CheckCircle className="h-5 w-5 text-green-500" />;
-    
-    switch (step) {
-      case "In Transit":
-        return <Truck className="h-5 w-5 text-orange-500" />;
-      case "Out for Delivery":
-        return <Package className="h-5 w-5 text-blue-500" />;
-      default:
-        return <Clock className="h-5 w-5 text-gray-400" />;
     }
   };
 
@@ -125,7 +117,7 @@ const Tracking = () => {
                   {isLoading ? (
                     <>
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Tracking...
+                      Searching...
                     </>
                   ) : (
                     <>
@@ -138,62 +130,55 @@ const Tracking = () => {
             </CardContent>
           </Card>
 
-          {trackingResult && (
+          {/* Error Message */}
+          {error && (
+            <Card className="mb-8 border-red-200 bg-red-50/80 backdrop-blur-sm">
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-2 text-red-700">
+                  <AlertCircle className="h-5 w-5" />
+                  <p>{error}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Tracking Results */}
+          {trackingResults.length > 0 && (
             <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5 text-orange-600" />
-                  Order Details
+                  Tracking Information
                 </CardTitle>
                 <CardDescription>
-                  Order #{trackingResult.orderNumber} • Placed on {trackingResult.orderDate}
+                  Found {trackingResults.length} order(s) for mobile number {mobileNumber}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                {/* Order Items */}
-                <div>
-                  <h4 className="font-semibold mb-3">Items Ordered:</h4>
-                  <div className="space-y-2">
-                    {trackingResult.items.map((item: any, index: number) => (
-                      <div key={index} className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
-                        <div>
-                          <p className="font-medium">{item.name}</p>
-                          <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
+              <CardContent>
+                <div className="space-y-4">
+                  {trackingResults.map((result, index) => (
+                    <div key={index} className="p-4 bg-orange-50 rounded-lg border border-orange-100">
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-semibold text-gray-900">Tracking ID: {result.trackingId}</h4>
+                            <p className="text-sm text-gray-600">Company: {result.companyName}</p>
+                          </div>
                         </div>
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${
-                          item.status === 'Delivered' ? 'bg-green-100 text-green-800' : 
-                          item.status === 'In Transit' ? 'bg-orange-100 text-orange-800' : 
-                          'bg-gray-100 text-gray-800'
-                        }`}>
-                          {item.status}
-                        </span>
+                        {result.websiteUrl && (
+                          <a
+                            href={result.websiteUrl.startsWith('http') ? result.websiteUrl : `https://${result.websiteUrl}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-orange-600 hover:text-orange-700 text-sm font-medium"
+                          >
+                            Track on {result.companyName} website
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tracking Timeline */}
-                <div>
-                  <h4 className="font-semibold mb-3">Tracking Timeline:</h4>
-                  <div className="space-y-3">
-                    {trackingResult.trackingSteps.map((step: any, index: number) => (
-                      <div key={index} className="flex items-center gap-3">
-                        {getStatusIcon(step.step, step.completed)}
-                        <div className="flex-1">
-                          <p className={`font-medium ${step.completed ? 'text-gray-900' : 'text-gray-500'}`}>
-                            {step.step}
-                          </p>
-                          <p className="text-sm text-gray-600">{step.date}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-orange-50 p-4 rounded-lg">
-                  <p className="text-sm text-gray-700">
-                    <strong>Estimated Delivery:</strong> {trackingResult.estimatedDelivery}
-                  </p>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
