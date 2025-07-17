@@ -242,7 +242,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-purple-400 mt-8 pt-8 text-center">
-            <p className="text-purple-100">&copy; 2024 Snare Home Decor. All rights reserved. | Delivering Royal Heritage Worldwide 🌍</p>
+            <p className="text-purple-100">&copy; 2025 Snare Home Decor. All rights reserved. | Delivering Royal Heritage Worldwide 🌍</p>
           </div>
         </div>
       </footer>
