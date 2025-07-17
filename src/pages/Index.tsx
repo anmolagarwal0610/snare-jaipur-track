@@ -40,7 +40,7 @@ const Index = () => {
             <div className="flex items-center justify-center mb-6">
               <Globe className="h-6 w-6 text-purple-600 mr-2" />
               <span className="text-lg font-semibold text-purple-700 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full">
-                Delivering Worldwide
+                🌍 Delivering Worldwide
               </span>
             </div>
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent">
