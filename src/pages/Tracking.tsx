@@ -54,20 +54,27 @@ const Tracking = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-pink-100">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-orange-200 sticky top-0 z-50">
+      <header className="bg-white/90 backdrop-blur-sm border-b border-purple-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="h-8 w-8 text-orange-600" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
-              Snare Home Decor
-            </h1>
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/lovable-uploads/6ccacee4-dc8b-42a5-8b67-d3ec0dcd5ad8.png" 
+              alt="Snare Home Decor Logo" 
+              className="h-12 w-12 object-contain"
+            />
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Snare Home Decor
+              </h1>
+              <p className="text-xs text-purple-600 font-medium">an artful excellence</p>
+            </div>
           </div>
           <nav className="flex items-center space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-orange-600 transition-colors">Home</Link>
-            <Link to="/tracking" className="text-gray-700 hover:text-orange-600 transition-colors">Track Order</Link>
-            <Button className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600">
+            <Link to="/" className="text-gray-700 hover:text-purple-600 transition-colors">Home</Link>
+            <Link to="/tracking" className="text-gray-700 hover:text-purple-600 transition-colors">Track Order</Link>
+            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
               Contact Us
             </Button>
           </nav>
@@ -77,18 +84,18 @@ const Tracking = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
-              Track Your Order
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Track Your Royal Order
             </h2>
             <p className="text-gray-600">
               Enter your mobile number to track your Snare Home Decor order
             </p>
           </div>
 
-          <Card className="mb-8 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+          <Card className="mb-8 border-0 shadow-lg bg-white/90 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Search className="h-5 w-5 text-orange-600" />
+                <Search className="h-5 w-5 text-purple-600" />
                 Order Tracking
               </CardTitle>
               <CardDescription>
@@ -112,7 +119,7 @@ const Tracking = () => {
                 <Button 
                   onClick={handleTrack}
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                 >
                   {isLoading ? (
                     <>
@@ -144,10 +151,10 @@ const Tracking = () => {
 
           {/* Tracking Results */}
           {trackingResults.length > 0 && (
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Package className="h-5 w-5 text-orange-600" />
+                  <Package className="h-5 w-5 text-purple-600" />
                   Tracking Information
                 </CardTitle>
                 <CardDescription>
@@ -157,7 +164,7 @@ const Tracking = () => {
               <CardContent>
                 <div className="space-y-4">
                   {trackingResults.map((result, index) => (
-                    <div key={index} className="p-4 bg-orange-50 rounded-lg border border-orange-100">
+                    <div key={index} className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
                       <div className="space-y-2">
                         <div className="flex justify-between items-start">
                           <div>
@@ -170,7 +177,7 @@ const Tracking = () => {
                             href={result.websiteUrl.startsWith('http') ? result.websiteUrl : `https://${result.websiteUrl}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-orange-600 hover:text-orange-700 text-sm font-medium"
+                            className="inline-flex items-center gap-1 text-purple-600 hover:text-purple-700 text-sm font-medium"
                           >
                             Track on {result.companyName} website
                             <ExternalLink className="h-3 w-3" />
