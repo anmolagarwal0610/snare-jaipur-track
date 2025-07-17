@@ -165,12 +165,12 @@ const Index = () => {
                 <CardContent className="p-6">
                   <h4 className="text-xl font-semibold mb-4 flex items-center">
                     <MapPin className="h-5 w-5 text-purple-600 mr-2" />
-                    Visit Our Royal Workshop
+                    Visit Our Office
                   </h4>
                   <p className="text-gray-600 mb-4">
-                    A-84 Singh Bhoomi Khatipura<br />
+                    A-84 Singh Bhoomi, Khatipura<br />
                     Jaipur, Rajasthan 302012<br />
-                    India
+                    India 🇮🇳
                   </p>
                 </CardContent>
               </Card>
