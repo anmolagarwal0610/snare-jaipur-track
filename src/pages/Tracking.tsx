@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,17 +20,11 @@ const Tracking = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // TODO: Replace with your actual Google Sheet ID
   const GOOGLE_SHEET_ID = "1qkBDMcHjtU9tMhBszFqedWpGwU7sBdYYHl6J6z_4_4Y";
 
   const handleTrack = async () => {
     if (!mobileNumber || mobileNumber.length !== 10) {
       setError("Please enter a valid 10-digit mobile number");
-      return;
-    }
-
-    if (GOOGLE_SHEET_ID === "YOUR_GOOGLE_SHEET_ID") {
-      setError("Google Sheet ID not configured. Please update the GOOGLE_SHEET_ID in the code.");
       return;
     }
 
