@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,29 +62,29 @@ const Tracking = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-red-50 to-orange-100">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white/90 backdrop-blur-sm border-b border-orange-200 sticky top-0 z-50">
+      <header className="bg-card/90 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
             <img 
               src="/lovable-uploads/6ccacee4-dc8b-42a5-8b67-d3ec0dcd5ad8.png" 
-              alt="Snare Home Decor Logo" 
-              className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+              alt="Snaré Logo" 
+              className="h-12 w-12 sm:h-16 sm:w-16 object-contain"
             />
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Snare Home Decor
+              <h1 className="text-2xl sm:text-3xl font-script font-bold text-foreground">
+                Snaré
               </h1>
-              <p className="text-xs text-orange-600 font-medium">an artful excellence</p>
+              <p className="text-sm text-muted-foreground font-serif italic">an artful excellence</p>
             </div>
           </div>
           <nav className="flex items-center space-x-4 sm:space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-orange-600 transition-colors text-sm sm:text-base">Home</Link>
-            <Link to="/tracking" className="text-gray-700 hover:text-orange-600 transition-colors text-sm sm:text-base">Track Order</Link>
+            <Link to="/" className="text-muted-foreground hover:text-primary transition-colors text-sm sm:text-base font-display">Home</Link>
+            <Link to="/tracking" className="text-muted-foreground hover:text-primary transition-colors text-sm sm:text-base font-display">Track Order</Link>
             <Button 
               onClick={scrollToContact}
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-sm sm:text-base px-3 py-2 sm:px-4"
+              className="bg-primary hover:bg-accent transition-all duration-300 text-sm sm:text-base px-4 py-2 rounded-full shadow-lg hover:shadow-xl"
             >
               Contact Us
             </Button>
@@ -93,31 +92,34 @@ const Tracking = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 sm:py-12">
+      <div className="container mx-auto px-4 py-12 sm:py-16">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+          <div className="text-center mb-10 animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl font-script font-bold mb-4 text-foreground">
               Track Your Royal Order
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 px-4">
-              Enter your mobile number to track your Snare Home Decor order
+            <div className="lotus-divider"></div>
+            <p className="text-lg text-muted-foreground font-display">
+              Enter your mobile number to track your Snaré order
             </p>
           </div>
 
-          <Card className="mb-6 sm:mb-8 border-0 shadow-lg bg-white/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                <Search className="h-5 w-5 text-orange-600" />
+          <Card className="mb-8 border-0 shadow-elegant bg-card rounded-3xl hover-lift">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-3 text-xl font-display text-foreground">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                  <Search className="h-5 w-5 text-primary-foreground" />
+                </div>
                 Order Tracking
               </CardTitle>
-              <CardDescription className="text-sm sm:text-base">
+              <CardDescription className="text-muted-foreground font-display">
                 Enter the mobile number used during order placement
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="pt-0">
+              <div className="space-y-6">
                 <div>
-                  <Label htmlFor="mobile" className="text-sm sm:text-base">Mobile Number</Label>
+                  <Label htmlFor="mobile" className="text-base font-display text-foreground">Mobile Number</Label>
                   <Input
                     id="mobile"
                     type="tel"
@@ -125,22 +127,22 @@ const Tracking = () => {
                     value={mobileNumber}
                     onChange={(e) => setMobileNumber(e.target.value)}
                     maxLength={10}
-                    className="mt-1 text-base"
+                    className="mt-2 text-base rounded-xl border-border focus:border-primary focus:ring-primary"
                   />
                 </div>
                 <Button 
                   onClick={handleTrack}
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-sm sm:text-base py-2.5"
+                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-base py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   {isLoading ? (
                     <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
                       Searching...
                     </>
                   ) : (
                     <>
-                      <Search className="mr-2 h-4 w-4" />
+                      <Search className="mr-2 h-5 w-5" />
                       Track Order
                     </>
                   )}
@@ -151,11 +153,11 @@ const Tracking = () => {
 
           {/* Error Message */}
           {error && (
-            <Card className="mb-6 sm:mb-8 border-red-200 bg-red-50/80 backdrop-blur-sm">
-              <CardContent className="pt-4 sm:pt-6">
-                <div className="flex items-center gap-2 text-red-700">
+            <Card className="mb-8 border-destructive/20 bg-destructive/10 rounded-3xl animate-slide-up">
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-3 text-destructive">
                   <AlertCircle className="h-5 w-5" />
-                  <p className="text-sm sm:text-base">{error}</p>
+                  <p className="text-base font-display">{error}</p>
                 </div>
               </CardContent>
             </Card>
@@ -163,41 +165,45 @@ const Tracking = () => {
 
           {/* Tracking Results */}
           {trackingResults.length > 0 && (
-            <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <Package className="h-5 w-5 text-orange-600" />
+            <Card className="border-0 shadow-elegant bg-card rounded-3xl animate-slide-up">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-3 text-xl font-display text-foreground">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <Package className="h-5 w-5 text-primary-foreground" />
+                  </div>
                   Tracking Information
                 </CardTitle>
-                <CardDescription className="text-sm sm:text-base">
+                <CardDescription className="text-muted-foreground font-display">
                   Found {trackingResults.length} order(s) for mobile number {mobileNumber}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <div className="space-y-4">
                   {trackingResults.map((result, index) => (
-                    <div key={index} className="p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border border-orange-100">
-                      <div className="space-y-3">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div key={index} className="p-6 bg-gradient-to-br from-muted/50 to-secondary/30 rounded-2xl border border-border/50 hover-lift">
+                      <div className="space-y-4">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <h4 className="font-semibold text-gray-900 text-sm sm:text-base">
+                            <div className="flex items-center gap-3 flex-wrap">
+                              <h4 className="font-display font-semibold text-foreground text-base">
                                 Tracking ID: {result.trackingId}
                               </h4>
                               <Button
                                 variant="outline"
                                 size="sm"
                                 onClick={() => copyTrackingId(result.trackingId)}
-                                className="h-8 w-8 p-0 border-orange-300 hover:bg-orange-100"
+                                className="h-8 w-8 p-0 border-primary/30 hover:bg-primary/10 rounded-lg transition-all duration-200"
                               >
                                 {copiedId === result.trackingId ? (
                                   <Check className="h-3 w-3 text-green-600" />
                                 ) : (
-                                  <Copy className="h-3 w-3 text-orange-600" />
+                                  <Copy className="h-3 w-3 text-primary" />
                                 )}
                               </Button>
                             </div>
-                            <p className="text-xs sm:text-sm text-gray-600 mt-1">Company: {result.companyName}</p>
+                            <p className="text-sm text-muted-foreground font-display mt-2">
+                              Company: {result.companyName}
+                            </p>
                           </div>
                         </div>
                         {result.websiteUrl && (
@@ -205,10 +211,10 @@ const Tracking = () => {
                             href={result.websiteUrl.startsWith('http') ? result.websiteUrl : `https://${result.websiteUrl}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-orange-600 hover:text-orange-700 text-xs sm:text-sm font-medium"
+                            className="inline-flex items-center gap-2 text-primary hover:text-accent text-sm font-display font-medium transition-colors duration-200"
                           >
                             Track on {result.companyName} website
-                            <ExternalLink className="h-3 w-3" />
+                            <ExternalLink className="h-4 w-4" />
                           </a>
                         )}
                       </div>
