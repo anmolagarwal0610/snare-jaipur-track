@@ -26,7 +26,6 @@ const Index = () => {
               <h1 className="text-2xl sm:text-3xl font-script font-bold text-foreground">
                 Snaré
               </h1>
-              <p className="text-sm text-muted-foreground font-serif italic">an artful excellence</p>
             </div>
           </div>
           <nav className="flex items-center space-x-4 sm:space-x-6">
@@ -47,13 +46,6 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-muted to-secondary/30"></div>
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto animate-fade-in">
-            <div className="mb-8">
-              <img 
-                src="/lovable-uploads/6ccacee4-dc8b-42a5-8b67-d3ec0dcd5ad8.png" 
-                alt="Snaré Logo" 
-                className="h-20 w-20 sm:h-28 sm:w-28 mx-auto object-contain mb-6"
-              />
-            </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-script font-bold mb-6 text-foreground leading-tight">
               Snaré: an artful excellence
             </h2>
