@@ -21,7 +21,7 @@ const Tracking = () => {
   const [error, setError] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const GOOGLE_SHEET_ID = "1qkBDMcHjtU9tMhBszFqedWpGwU7sBdYYHl6J6z_4_4Y";
+  const PUBLIC_SHEET_ID = "1qkBDMcHjtU9tMhBszFqedWpGwU7sBdYYHl6J6z_4_4Y";
 
   const scrollToContact = () => {
     window.location.href = "/#contact-section";
@@ -37,7 +37,7 @@ const Tracking = () => {
     setError(null);
     
     try {
-      const results = await searchTrackingData(mobileNumber, GOOGLE_SHEET_ID);
+      const results = await searchTrackingData(mobileNumber, PUBLIC_SHEET_ID);
       setTrackingResults(results);
       
       if (results.length === 0) {
